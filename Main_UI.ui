@@ -85,6 +85,14 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Yu Gothic UI Semibold</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>Browse </string>
    </property>
@@ -117,6 +125,14 @@
      <height>40</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Yu Gothic UI Semibold</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>Browse </string>
    </property>
@@ -125,7 +141,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>330</y>
+     <y>380</y>
      <width>401</width>
      <height>41</height>
     </rect>
@@ -144,10 +160,18 @@
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>340</y>
+     <y>380</y>
      <width>121</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Yu Gothic UI Semibold</family>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Browse </string>
@@ -157,7 +181,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>390</y>
+     <y>420</y>
      <width>451</width>
      <height>41</height>
     </rect>
@@ -176,7 +200,7 @@
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>400</y>
+     <y>430</y>
      <width>104</width>
      <height>41</height>
     </rect>
@@ -267,6 +291,11 @@ p, li { white-space: pre-wrap; }
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Sign out</string>
    </property>
@@ -274,11 +303,19 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="START">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>460</y>
+     <x>290</x>
+     <y>480</y>
      <width>221</width>
      <height>61</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Sans Serif</family>
+     <pointsize>22</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Start Sending</string>
@@ -295,6 +332,55 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="locate_excel_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>330</y>
+     <width>591</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; color:#ffffff;&quot;&gt;Enter VALID telephone country code of your numbers - &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="country_code">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>330</y>
+     <width>104</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;+91&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Rem_code">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>340</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>REMEMBER THIS CODE</string>
    </property>
   </widget>
  </widget>
