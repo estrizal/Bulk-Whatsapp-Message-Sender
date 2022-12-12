@@ -2,10 +2,13 @@
 
 YOU CAN DOWNLOAD THE EXECUTABLE FILE OF THIS PROJECT FROM HERE:- https://sites.google.com/view/estriadi-portfolio-1/bulk-whatsapp-sender?authuser=0
 I have just converted python code to exe and then use inno setup compiler to make an installer for distribution.
-
 This project sends whatsapp messages to phone numbers stored in the first column of an excel file.
 
+
+
 Technical stuff down here:) :-
+
+fist step will be to make a txt file named 'WhatsApp_version.txt' and put it in C:\ProgramData if you cant see this folder, then enable show hidden folder option in your folder settings in control panel. then install all the libraries used in the project, you will need to do some google searches too as some libraries are more trouble some than others.
 
 This whatsapp sender.py is the main file of this project. The project uses selenium library to automate the process of sending whatsapp messages.
 
