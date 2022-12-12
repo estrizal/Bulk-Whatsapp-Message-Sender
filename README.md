@@ -1,20 +1,18 @@
-# Voice-Typer-Open-Source
+# Whatsapp-message-sender-open-source
 
-This code does NOT work now, before whatsapp was updated, the time when you needed to have internet connection on you mobile to use whatsapp on computer, It used to work.
-Not any more
+YOU CAN DOWNLOAD THE EXECUTABLE FILE OF THIS PROJECT FROM HERE:- https://sites.google.com/view/estriadi-portfolio-1/bulk-whatsapp-sender?authuser=0
+I have just converted python code to exe and then use inno setup compiler to make an installer for distribution.
 
+This project sends whatsapp messages to phone numbers stored in the first column of an excel file.
 
-I have used selenium for web automation
+Technical stuff down here:) :-
 
-The msedgedriver.exe file in this folder would be outdate, so you will have to download the latest file from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/   and replace it with the old one.
+This whatsapp sender.py is the main file of this project. The project uses selenium library to automate the process of sending whatsapp messages.
 
-Your Microsoft Edge Browser must be updated to the latest version too
+If you have worked with selenium, you would know that you have to download a webdriver for the suitable version of your browser. so this app first checks the version of your microsoft edge from your registry and checks if the currect version of webdriver matchs, if not it runs the edge update.exe file (which is just the converted version of edge_update.py) and download the latest version.
 
-*In the Whatsapp_Sender.py File, you have to FIND AND REPLACE +91 with the country calling code of your country (the thing in the starting of a phone number) +91 is the country code of my country, thus it is +91 in the code
+there is also an updater to update the app whenever I launch one. Firebase is used for authentication and launching update. 
 
-As you have probably guessed, Whatsapp_Sender.py is the main code.
+In this project I have used multiprocessing library, to run multiple functions at onece.e
 
-Whatsapp_Updater.exe is the exe file made by .py file of whatsapp updater
-
-whatsapp_updater.py file updates the application, if I launch an update, to understand this updater, you should know the basics of FIREBASE.
-
+I Know the code a LOTTTT MESSYY and Without comments too, but I am lazy enough to not care XD
