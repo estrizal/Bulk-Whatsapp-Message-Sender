@@ -1,5 +1,4 @@
 from lib2to3.pgen2 import driver
-import edgedriver_autoinstaller
 #from multiprocessing import process
 #from multiprocessing.context import Process
 from email import message
@@ -17,12 +16,12 @@ from multiprocessing import process
 from ctypes import c_char_p
 from PyQt5.uic.uiparser import WidgetStack
 #from pyrebase.pyrebase import Database
-import pyrebase
+import pyrebase #pip install pyrebase4 then pip uninstall crypto and install crypto then rename it to Crypto in site packages and then install pycrypto
 import os
 import socket
 #source whatsapp imports below
 
-import xlrd    
+import xlrd    #pip install xlrd 1.2.0
 from selenium import webdriver  
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
@@ -35,9 +34,14 @@ import pyperclip
 from io import BytesIO
 #import ioS
 import codecs
-import win32clipboard
+import win32clipboard #pip install pywin32
 from PIL import Image
-import docx
+import docxpy
+import winreg
+
+
+
+
 
 
 
@@ -112,6 +116,14 @@ class Main(QMainWindow): #,FROM_MAIN):
         self.Excel.clicked.connect(self.excel_browse)
         self.Attachment.clicked.connect(self.Photo_browse)
         self.START.clicked.connect(self.start_sending)
+        self.Rem_code.clicked.connect(self.rem_code)
+
+        try:
+            file = open(r"C:\ProgramData\con_code.txt", 'r')
+            con_code_Content = file.read()
+            self.country_code.setPlainText(con_code_Content)
+        except:
+            pass
 
         
     def gotologin(self):
@@ -146,6 +158,7 @@ class Main(QMainWindow): #,FROM_MAIN):
       global DOCUMENT_Path
       global Excel_path
       global Photo_or_video_Path
+      '''
       def Read_docx(filepath):
           doc = docx.Document(filepath)
           FinalText = []
@@ -153,6 +166,10 @@ class Main(QMainWindow): #,FROM_MAIN):
               FinalText.append(paragraph.text)
         
           return '\n' .join(FinalText)
+      '''
+      def Read_docx(filepath):
+        text = docxpy.process(filepath)
+        return text
 
       try:
        i_Cant = False
@@ -169,10 +186,39 @@ class Main(QMainWindow): #,FROM_MAIN):
        try:
            wait = self.wait_starting_chat.toPlainText()
            wait = int(wait)
+
        except:
            self.Error.setText("<font size=12 color='#ff0000'>"+"only type numbers in the waiting time field"+"</font>")
            self.Error.setHidden(False)
            i_Cant = True
+
+
+       try:
+           con_code = self.country_code.toPlainText()
+           con_code = int(con_code)
+
+       except:
+           self.Error.setText("<font size=12 color='#ff0000'>"+"Country Code cant be an alphabet."+"</font>")
+           self.Error.setHidden(False)
+           i_Cant = True
+
+       try:
+           loc = (Excel_path)
+           wr=xlrd.open_workbook(loc) #opening excel file
+           shee1 = wr.sheet_by_index(0) #sheet number
+           num = shee1.cell_value(0,0) #cell value, ghs columb and row to get phone number
+           num2 = str(num)  
+           num2 = shee1.cell_value(0,0)
+           num2 = str(num2)
+           num2 = num2[:-2]
+       except:
+           self.Error.setText("<font size=12 color='#ff0000'>"+"excelfile does not have no. in A1 of 1st sheet by index"+"</font>")
+           self.Error.setHidden(False)
+           i_Cant = True
+
+
+
+
 
 
 
@@ -183,6 +229,8 @@ class Main(QMainWindow): #,FROM_MAIN):
        elif Excel_path == '':
            self.Error.setText("<font size=12 color='#ff0000'>"+"Please browse the xlsx file with phonenumbers to send"+"</font>")
            self.Error.setHidden(False)
+
+
 
        elif i_Cant == True:
            print('i_cant')
@@ -199,6 +247,9 @@ class Main(QMainWindow): #,FROM_MAIN):
 
         wait = self.wait_starting_chat.toPlainText()
         wait = int(wait)
+
+        con_code = self.country_code.toPlainText()
+        con_code = int(con_code)
 
 
 
@@ -237,8 +288,9 @@ class Main(QMainWindow): #,FROM_MAIN):
         hf = 0   # THIS IS THE VARIABLE USED SO THAT THE WHILE LOOP CAN BE RAN MANY TIMES
         path = 1 # THIS IS THE VARIABLE ..... YOU WONT UNDERSTANT SO I AM NOT WRITING
         npf = 1  # THIS IS THE VARIABLE TO DEFINE HOW MANY TABS ARE OPENED RIGHT NOW + 1
-        edgedriver_autoinstaller.install()
+
         browser = webdriver.Edge('msedgedriver.exe') #webdriver.Chrome('D:\\chromedriver.exe')  # THIS IS THE LOCATION OF YOUR WEBDRIVER
+        
         wr=xlrd.open_workbook(loc) #opening excel file
         shee1 = wr.sheet_by_index(0) #sheet number
         num = shee1.cell_value(ghs,nsh) #cell value, ghs columb and row to get phone number
@@ -267,9 +319,9 @@ class Main(QMainWindow): #,FROM_MAIN):
         pyperclip.copy(messege)
         browser.get('https://web.whatsapp.com/')
         #load_whatsapp = WebDriverWait(browser, 1000000000000).until(EC.presence_of_element_located((By.XPATH, '//*[@id="side"]/div[1]/div/label/div/div[2]')))
-        load_whatsapp = WebDriverWait(browser, 1000000000000).until(EC.presence_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[3]/span/div/div')))
+        load_whatsapp = WebDriverWait(browser, 1000000000000).until(EC.presence_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[3]/div'))) #  //*[@id="app"]/div/div/div[3]/span/div/div
         #time.sleep(20)
-        while hf <=  10000000:
+        while hf == hf:
             try:
                 #messege = messege.replace("[","").replace("]","").replace("'","").replace("\ufeff","")
                 #print(messege)
@@ -279,7 +331,7 @@ class Main(QMainWindow): #,FROM_MAIN):
                 num2 = num2[:-2]
 
                 #patanahi = 'https://api.WhatsApp.com/send?phone=+91'+num2
-                patanahi = 'https://wa.me/+91'+num2
+                patanahi = 'https://web.whatsapp.com/send/?phone='+str(con_code)+num2+'&text&type=phone_number&app_absent=0'   #'https://wa.me/'+str(con_code)+num2
                 browser.execute_script("window.open('');")
                 browser.switch_to.window(browser.window_handles[npf])
                 
@@ -287,6 +339,10 @@ class Main(QMainWindow): #,FROM_MAIN):
                 
                 print(patanahi)
                 #browser.get('https://api.WhatsApp.com/send?phone=+91'+num2)
+                #open_app_error_fix = browser.find_element_by_xpath('//*[@id="main_block"]/div[1]/h2')
+                #load_error_check 
+
+                '''
                 coc = browser.find_element_by_xpath('//*[@id="action-button"]')
                 load_coc = WebDriverWait(browser, 1000000).until(EC.presence_of_element_located((By.XPATH, '//*[@id="action-button"]'))) #maybe continue to chat
                 coc = browser.find_element_by_xpath('//*[@id="action-button"]')
@@ -295,13 +351,15 @@ class Main(QMainWindow): #,FROM_MAIN):
                 continueto = browser.find_element_by_partial_link_text('use WhatsApp Web')
                 continueto.click()
                 #time.sleep(10)
+                '''
+                time.sleep(13)
                 try:    
                         
                         myElem = WebDriverWait(browser, wait).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')))
                         typenum = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')  # MESSEGE WALA TEXT BOX TO FIND KR RHE HAI  //*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[2] old sending message
                         time.sleep(0.8)
-                        use_here_buttom = browser.find_element_by_xpath('//*[@id="app"]/div/div/div/div/div/div/div[2]/div/div[2]')
-                        use_here_buttom.click()
+                        #use_here_buttom = browser.find_element_by_xpath('//*[@id="app"]/div/div/div/div/div/div/div[2]/div/div[2]')
+                        #use_here_buttom.click()
                         time.sleep(0.5)
                         typenum.click()
 
@@ -371,6 +429,7 @@ class Main(QMainWindow): #,FROM_MAIN):
                         '''
                 except Exception as identifier:
                     print(identifier)
+                    time.sleep(3)
             except Exception as identifier:
                 print(identifier)
             #typenum = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')
@@ -417,7 +476,7 @@ class Main(QMainWindow): #,FROM_MAIN):
                 
             else:
                 pass    
-
+            print("Sent till row no." + str(ghs))
             ghs = ghs+1
             hf=hf+1
             path = path+1
@@ -425,7 +484,21 @@ class Main(QMainWindow): #,FROM_MAIN):
       except Exception as A:
           print(A)
 
-    
+
+
+    def rem_code(self):
+        try:
+            file = open(r"C:\ProgramData\con_code.txt", 'w+')
+            con_code = self.country_code.toPlainText()
+            try:
+                for_an_error = int(con_code)
+                file.write(con_code)
+
+            except:
+                print("The user tried to put an alphabet in number field")
+                
+        except:
+            pass
 
 
 def Update_the_app(status_of_internet,User_interface):
@@ -442,6 +515,50 @@ def Update_the_app(status_of_internet,User_interface):
         if current_version != Server_version:
             os.startfile('Whatsapp Sender updaterr.bat')
             os.system("TASKKILL /F /IM Whatsapp_Sender.exe")
+        else:
+            def get_registry_value(path, name="", start_key = None):
+                if isinstance(path, str):
+                    path = path.split("\\")
+                if start_key is None:
+                    start_key = getattr(winreg, path[0])
+                    return get_registry_value(path[1:], name, start_key)
+                else:
+                    subkey = path.pop(0)
+                with winreg.OpenKey(start_key, subkey) as handle:
+                    assert handle
+                    if path:
+                        return get_registry_value(path, name, handle)
+                    else:
+                        desc, i = None, 0
+                        while not desc or desc[0] != name:
+                            desc = winreg.EnumValue(handle, i)
+                            i += i
+                        return desc[1]
+
+
+
+            def update_driver():
+                os.startfile('edge_update.bat')
+
+
+            MS_VERSION = get_registry_value(r"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Edge\BLBeacon","version")
+            print('your edge version is')
+            print(MS_VERSION)
+
+            try:
+                file = open(r"C:\ProgramData\msedge_version.txt", 'r')
+                current_version = file.read()
+                current_version = current_version.replace("\n","").replace(" ","")
+                print(current_version)
+                if str(current_version) == str(MS_VERSION):
+                    print("driver is upto date")
+                else:
+                    update_driver()
+            except Exception as i:
+                print(i)
+                update_driver()           
+
+
 
 
         
@@ -467,7 +584,7 @@ class login(QDialog):
     def __init__(self):
         super(login,self).__init__()
         loadUi("Log_in.ui",self)
-        widget.setFixedSize(866,592)
+        widget.setFixedSize(897,617)
         self.Register_button.clicked.connect(self.switchtoregister)
         self.Login_button.clicked.connect(self.login_to_firebase)
         self.internet.setHidden(True)
@@ -482,6 +599,8 @@ class login(QDialog):
         if register_loaded == True:
             pass
         #if widget.currentIndex == 
+        self.Email_input.setPlainText("")
+        self.Password_input.setPlainText("")
         widget.setCurrentIndex(widget.currentIndex() +1)
         #widget.removeWidget(self)
         #widget.setCurrentIndex(widget.currentIndex() +1)
@@ -491,6 +610,11 @@ class login(QDialog):
         global Firebase
         email = self.Email_input.toPlainText()
         password = self.Password_input.toPlainText()
+
+        email = email.replace('\n','').replace(' ','')
+
+
+        password = password.replace('\n','').replace(' ','')
         try:
             login = auth.sign_in_with_email_and_password(email, password)
             #main = Main()
@@ -500,6 +624,8 @@ class login(QDialog):
             my_file.write(email_credentials +"\n")
             my_file.write(password)
             my_file.close()
+            self.Email_input.setPlainText("")
+            self.Password_input.setPlainText("")
             widget.setCurrentIndex(widget.currentIndex() - 1)
             widget.setFixedSize(866,592)
         except Exception as a:
@@ -526,14 +652,22 @@ class register(QDialog):
         #    widget.removeWidget(self)
         global register_loaded
         register_loaded = True
+        self.Email_user_input.setPlainText("")
+        self.Password_user_input.setPlainText("")
+        self.Confirm_Passoword_user_input.setPlainText("")
         widget.setCurrentIndex(widget.currentIndex() -1)
-
     def register_firebase(self):
         global auth
         global Firebase
         email = self.Email_user_input.toPlainText()
+        email = email.replace('\n','').replace(' ','')
+
         password = self.Password_user_input.toPlainText()
+        password = password.replace('\n','').replace(' ','')
+
         confirm_pass = self.Confirm_Passoword_user_input.toPlainText()
+        confirm_pass = confirm_pass.replace('\n','').replace(' ','')
+
         if password == confirm_pass:
             try:
                 user = auth.create_user_with_email_and_password(email,password)
