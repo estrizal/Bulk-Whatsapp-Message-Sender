@@ -21,5 +21,12 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 
 :gotAdmin
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params = %*:"=""
+    echo UAC.ShellExecute "Whatsapp_Sender_Update2.exe", "", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /B
     pushd "%CD%"
     CD /D "%~dp0"
