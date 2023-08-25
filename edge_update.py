@@ -1,5 +1,13 @@
 import winreg
 from zipfile import ZipFile
+import os.path
+import sys
+is_64 = sys.maxsize > 2**32
+if is_64 == True:
+    print("your compouter is 64 bit")
+else:
+    print("Your computer is 32 bit")
+
 
 def get_registry_value(path, name="", start_key = None):
     if isinstance(path, str):
@@ -28,7 +36,14 @@ print(MS_VERSION)
 def update_driver(MS):
     print("downloading the edgedriver for this version")
     import urllib.request
-    urllib.request.urlretrieve("https://msedgedriver.azureedge.net//"+str(MS)+"/edgedriver_win32.zip", "edgedriver_win32.zip")
+    if is_64 == False:
+        urllib.request.urlretrieve("https://msedgedriver.azureedge.net//"+str(MS)+"/edgedriver_win32.zip", "edgedriver_win32.zip")
+    
+    if is_64 == True:
+        try:
+            urllib.request.urlretrieve("https://msedgedriver.azureedge.net//"+str(MS)+"/edgedriver_win64.zip", "edgedriver_win32.zip")
+        except:
+            urllib.request.urlretrieve("https://msedgedriver.azureedge.net//"+str(MS)+"/edgedriver_win32.zip", "edgedriver_win32.zip")
 
 
     with ZipFile('edgedriver_win32.zip','r') as zip:
@@ -47,7 +62,13 @@ try:
     current_version = current_version.replace("\n","").replace(" ","")
     print(current_version)
     if str(current_version) == str(MS_VERSION):
-        print("driver is upto date")
+        if os.path.isfile( 'msedgedriver.exe'):
+            print("driver is upto date and file is in the right place")
+        else:
+            print("the software might have been reinstalled, thus msedge is not there. Downloading file")
+            update_driver(MS_VERSION)
+
+    
     else:
         update_driver(MS_VERSION)
 except Exception as i:
