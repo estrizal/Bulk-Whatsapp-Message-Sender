@@ -3,6 +3,8 @@
 
 *MOST IMPORTANT NOTE* :- This whatsapp sender has stopped working, as the whatsapp is probably checking some advance pattern detectors to detect automation. Though, it might still work in some countries. but it's not working in india atleast. as of now. 
 
+Here's a working demo of the time when this code used to work:- https://www.youtube.com/watch?v=RT-ZnvpnIRU&t=3s
+
 YOU CAN DOWNLOAD THE EXECUTABLE FILE OF THIS PROJECT FROM HERE:- https://sites.google.com/view/estriadi-portfolio-1/bulk-whatsapp-sender?authuser=0
 I have just converted python code to exe and then use inno setup compiler to make an installer for distribution.
 This project sends whatsapp messages to phone numbers stored in the first column of an excel file.
