@@ -6,3 +6,4 @@ pip install pyautogui
 pip install pywin32
 pip install docxpy
 pip install pyperclip
+pip install pillow
