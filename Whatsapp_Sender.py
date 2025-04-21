@@ -1,21 +1,16 @@
-from lib2to3.pgen2 import driver
-from email import message
-from logging import exception
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QDialog
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 import sys
 from PyQt5.uic import loadUi
 import time
 import multiprocessing
 from multiprocessing.context import Process
-from multiprocessing import process
 from ctypes import c_char_p
-from PyQt5.uic.uiparser import WidgetStack
 #from pyrebase.pyrebase import Database
 import pyrebase #pip install pyrebase4 
 #run it if the error occurs then pip uninstall crypto and install crypto then rename it to Crypto (C is in capital now) in site packages and then install pycrypto
@@ -25,19 +20,14 @@ import socket
 
 import xlrd    #pip install xlrd==1.2.0
 from selenium import webdriver  
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
 import pyautogui
 import pyperclip
-from io import BytesIO
 #import ioS
-import codecs
 import win32clipboard #pip install pywin32
-from PIL import Image
 import docxpy
 import winreg
 import webbrowser
@@ -304,10 +294,10 @@ class Main(QMainWindow): #,FROM_MAIN):
         ghs = 0  # THIS IS THE VARIABLE TO DEFINE THE COLUMB
         nsh = 0  # THIS VARIABLE IS USED A THE VALUE OF ROWS
         hf = 0   # THIS IS THE VARIABLE USED SO THAT THE WHILE LOOP CAN BE RAN MANY TIMES
-        path = 1 # THIS IS THE VARIABLE ..... YOU WONT UNDERSTANT SO I AM NOT WRITING
+        path = 1 # THIS IS THE VARIABLE ..... YOU WONT UNDERSTAND SO I AM NOT WRITING
         npf = 1  # THIS IS THE VARIABLE TO DEFINE HOW MANY TABS ARE OPENED RIGHT NOW + 1
 
-        browser = webdriver.Edge('msedgedriver.exe') #webdriver.Chrome('D:\\chromedriver.exe')  # THIS IS THE LOCATION OF YOUR WEBDRIVER
+        browser = webdriver.Edge(r'C:\ProgramData\msedgedriver.exe') #webdriver.Chrome('D:\\chromedriver.exe')  # THIS IS THE LOCATION OF YOUR WEBDRIVER
         
         wr=xlrd.open_workbook(loc) #opening excel file
         shee1 = wr.sheet_by_index(0) #sheet number
@@ -337,8 +327,8 @@ class Main(QMainWindow): #,FROM_MAIN):
                 time.sleep(13)
                 try:    
                         
-                        myElem = WebDriverWait(browser, wait).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p'))) #//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p
-                        typenum = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')  # MESSEGE WALA TEXT BOX TO FIND KR RHE HAI  //*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[2] old sending message
+                        myElem = WebDriverWait(browser, wait).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p'))) #//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p
+                        typenum = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div[1]/p')  # MESSEGE WALA TEXT BOX TO FIND KR RHE HAI  //*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[2] old sending message
                         time.sleep(0.8)
                         time.sleep(0.5)
                         typenum.click()
@@ -347,7 +337,7 @@ class Main(QMainWindow): #,FROM_MAIN):
                         typenum.send_keys(Keys.ENTER)
                         time.sleep(1)
 
-                        pipicon = browser.find_element_by_xpath('//div[@title="Attach"]')
+                        pipicon = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div/span/div/div[1]/div/button')#//div[@title="Attach"]
                         pipicon.click()
                         time.sleep(1)
                         filepath = Photo_or_video_Path
@@ -516,17 +506,20 @@ class register(QDialog):
 def Update_the_app(status_of_internet,User_interface):
     time.sleep(8)
     if status_of_internet.value=="connected":
-        file = open(r"C:\ProgramData\WhatsApp_version.txt", 'r')
-        current_version = file.read()
-        file.close()
-        print(current_version)
-        database = Firebase.database()
-        Server_Version = database.get()
-        Server_version = str(Server_Version.val()).replace("OrderedDict", "").replace("(", "").replace(")" ,"").replace("[" ,"").replace("]" ,"").replace("'" ,"").replace("Beta" ,"").replace("," ,"").replace("Yup" ,"").replace(" " ,"").replace("Version","")
-        print(Server_version)
-        if current_version != Server_version:
-            os.startfile('Whatsapp Sender updaterr.bat')
-            os.system("TASKKILL /F /IM Sanchar_Whatsapp_Sender.exe")
+        # file = open(r"C:\ProgramData\WhatsApp_version.txt", 'r')
+        # current_version = file.read()
+        # file.close()
+        # print(current_version)
+        # database = Firebase.database()
+        # Server_Version = database.get()
+        # Server_version = str(Server_Version.val()).replace("OrderedDict", "").replace("(", "").replace(")" ,"").replace("[" ,"").replace("]" ,"").replace("'" ,"").replace("Beta" ,"").replace("," ,"").replace("Yup" ,"").replace(" " ,"").replace("Version","")
+        # print(Server_version)
+        # if current_version != Server_version:
+        #     os.startfile('Whatsapp Sender updaterr.bat')
+        #     os.system("TASKKILL /F /IM Sanchar_Whatsapp_Sender.exe")
+
+        if 1 == 2:
+            pass
         else:
             def get_registry_value(path, name="", start_key = None):
                 if isinstance(path, str):
@@ -563,7 +556,7 @@ def Update_the_app(status_of_internet,User_interface):
             current_version = current_version.replace("\n","").replace(" ","")
             print(current_version)
             if str(current_version) == str(MS_VERSION):
-                if os.path.isfile( 'msedgedriver.exe'):
+                if os.path.isfile( r'C:\ProgramData\msedgedriver.exe'):
                     print("driver is upto date and file is in the right place")
                 else:
                     print("the software might have been reinstalled, thus msedge is not there. Downloading file")
